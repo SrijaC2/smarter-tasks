@@ -5,6 +5,9 @@ import { UserCircleIcon } from "@heroicons/react/24/outline";
 import Logo from "../../assets/images/logo.png";
 import { Link, useLocation } from "react-router-dom";
 import { ThemeContext } from "../../context/theme";
+import LanguageSelector from "./LanguageSelector";
+import { useTranslation } from "react-i18next";
+
 
 const userNavigation = [
   { name: "Profile", href: "#" },
@@ -35,6 +38,7 @@ const Appbar = () => {
     { name: "Projects", href: "/account/projects", current: false },
     { name: "Members", href: "/account/members", current: false },
   ];
+  const {t} = useTranslation();
 
   return (
     <>
@@ -63,7 +67,7 @@ const Appbar = () => {
                           )}
                           aria-current={isCurrent ? "page" : undefined}
                         >
-                          {item.name}
+                          {t(item.name)}
                         </Link>
                       );
                     })}
@@ -72,6 +76,7 @@ const Appbar = () => {
               </div>
               <div className="hidden md:block">
                 <div className="ml-4 flex items-center md:ml-6">
+                  <LanguageSelector/>
                   <Switch
                     checked={enabled}
                     onChange={toggleTheme}

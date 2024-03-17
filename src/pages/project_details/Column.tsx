@@ -2,8 +2,7 @@ import React, { forwardRef } from "react";
 import Task from "./Task";
 import { ColumnData, TaskDetails } from "../../context/task/types";
 import { Droppable } from "react-beautiful-dnd";
-
-
+import { useTranslation } from "react-i18next";
 
 const Container = (props: React.PropsWithChildren) => {
   // We will use flex to display lists as columns
@@ -36,9 +35,11 @@ interface Props {
 }
 
 const Column: React.FC<Props> = (props) => {
+  const {t} = useTranslation(); 
+  
   return (
     <Container>
-      <Title>{props.column.title}</Title>
+      <Title>{t(props.column.title)}</Title>
       <Droppable droppableId={props.column.id}>
         {(provided) => (
           <TaskList ref={provided.innerRef} {...provided.droppableProps}>

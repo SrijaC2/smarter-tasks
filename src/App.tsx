@@ -5,7 +5,7 @@ import router from "./routes";
 import { ThemeContext } from "./context/theme";
 import { ProjectsProvider } from "./context/projects/context";
 import { UsersProvider } from "./context/members/context";
-
+import "./i18n"
 const App = () => {
   const { theme } = useContext(ThemeContext);
   return (

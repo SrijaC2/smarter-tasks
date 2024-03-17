@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { TaskDetails } from "../../context/task/types";
 import "./TaskCard.css";
@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useTasksDispatch } from "../../context/task/context";
 import { deleteTask } from "../../context/task/actions";
-
+import { useTranslation } from "react-i18next";
 
 const Task = forwardRef<
   HTMLDivElement,
@@ -15,6 +15,52 @@ const Task = forwardRef<
   const taskDispatch = useTasksDispatch();
   const { projectID } = useParams();
   const { task } = props;
+  const {t} = useTranslation();
+
+  // Date Localization
+ function FormattedDate({ dateString }) {
+    const { i18n } = useTranslation();
+    const [formattedDate, setFormattedDate] = useState('');
+  
+    useEffect(() => {
+      if (dateString) {
+        const date = new Date(dateString);
+        const locale = i18n.language;
+        const dateFormatter = new Intl.DateTimeFormat(locale, {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+  
+        const formattedDate = dateFormatter.format(date);
+        setFormattedDate(formattedDate);
+      }
+    }, [dateString, i18n.language]);
+  
+    return <span>{formattedDate}</span>;
+  }
+
+  // Time Localization
+  function FormattedTime() {
+    const { i18n } = useTranslation();
+    const [formattedTime, setFormattedTime] = useState('');
+  
+    useEffect(() => {
+      const date = new Date();
+      const locale = i18n.language; // Get the current language from react-i18next
+      const timeFormatter = new Intl.DateTimeFormat(locale, {
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+      });
+  
+      const formattedTime = timeFormatter.format(date);
+      setFormattedTime(formattedTime);
+    }, [i18n.language]); // Re-run effect when language changes
+  
+    return <span>{formattedTime}</span>;
+  }
+
   return (
     <div ref={ref} {...props} className="m-2 flex">
       <Link
@@ -24,12 +70,20 @@ const Task = forwardRef<
         <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
         <div>
   <h2 className="text-base font-bold my-1">{task.title}</h2>
+
+  {/* Formatted Date */}
   <p className="text-sm text-slate-500">
-    {new Date(task.dueDate).toDateString()}
+    <FormattedDate dateString={task.dueDate} />
   </p>
-  <p className="text-sm text-slate-500">Description: {task.description}</p>
+  
+  {/* Formatted Time */}
   <p className="text-sm text-slate-500">
-    Assignee: {task.assignedUserName ?? "-"}
+    <FormattedTime />
+  </p>
+ 
+  <p className="text-sm text-slate-500">{t('desctiptionText')}: {task.description}</p>
+  <p className="text-sm text-slate-500">
+    {t('assigneeText')}: {task.assignedUserName ?? "-"}
   </p>
 </div>
           <button

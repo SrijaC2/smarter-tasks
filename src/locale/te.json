@@ -1,0 +1,28 @@
+{
+    "translation": {
+      "Pending": "పెండింగ్",
+      "In progress": "ప్రోగ్రెస్ లో",
+      "Done": "పూర్తయింది",
+      "Projects": "ప్రాజెక్టులు",
+      "Members": "సభ్యులు",
+      "newProjectButtonText": "కొత్త ప్రాజెక్టు",
+      "newProjectModalHeader": "కొత్త ప్రాజెక్టు జోడించండి",
+      "projectNamePlaceHolder": "ప్రాజెక్టు పేరు నమోదు చేయండి",
+      "newMemberButtonText": "కొత్త సభ్యు",
+      "newMemberModalHeader": "కొత్త సభ్యు జోడించండి",
+      "name": "పేరు",
+      "submitButtonText": "సమర్పించు",
+      "cancelButtonText": "రద్దు చేయండి",
+      "updateButtonText": "నవీకరించు",
+      "addCommentBtnText": "వ్యాఖ్య జోడించు",
+      "newTaskButtonText": "కొత్త పని",
+      "newTaskModalHeader": "కొత్త పని జోడించండి",
+      "newTaskTitlePlaceHolder": "పని శీర్షిక నమోదు చేయండి",
+      "newTitleDescriptionPlaceHolder": "పని వివరాలు నమోదు చేయండి",
+      "taskDetailsModalHeader": "పని వివరాలు",
+      "assigneeText": "అవార్డీకర్త",
+      "commentText": "వ్యాఖ్య",
+      "desctiptionText": "వివరణ"
+    }
+  }
+  

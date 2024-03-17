@@ -9,6 +9,7 @@ import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
 import { useProjectsState } from "../../context/projects/context";
 import { TaskDetailsPayload } from "../../context/task/types";
 import { useUsersState } from "../../context/members/context";
+import { useTranslation } from "react-i18next";
 
 import {
   fetchComments, // Add the fetchComments function
@@ -124,6 +125,7 @@ const TaskDetails = () => {
       if(projectID && taskID)
       createComment(commentsDispatch, projectID, taskID, comment);
   };
+  const {t} = useTranslation();
 
   return (
     <>
@@ -157,14 +159,14 @@ const TaskDetails = () => {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
-                    Task Details
+                    {t('taskDetailsModalHeader')}
                   </Dialog.Title>
                   <div className="mt-2">
                     <form onSubmit={handleSubmit(onSubmit)}>
                       <input
                         type="text"
                         required
-                        placeholder="Enter title"
+                        placeholder={t('newTaskTitlePlaceHolder')}
                         id="title"
                         {...register("title", { required: true })}
                         className="w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
@@ -172,7 +174,7 @@ const TaskDetails = () => {
                       <input
                         type="text"
                         required
-                        placeholder="Enter description"
+                        placeholder={t('newTitleDescriptionPlaceHolder')}
                         id="description"
                         {...register("description", { required: true })}
                         className="w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
@@ -186,7 +188,7 @@ const TaskDetails = () => {
                         className="w-full border rounded-md py-2 px-3 my-4 text-gray-700 leading-tight focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
                       />
                       <h3>
-                        <strong>Assignee</strong>
+                        <strong>{t('assigneeText')}</strong>
                       </h3>
                       <Listbox
                         value={selectedPerson}
@@ -235,7 +237,7 @@ const TaskDetails = () => {
 
                       <div className="mt-4">
                       <h3 className="text-lg font-medium leading-6 text-gray-900">
-                        Comments
+                      {t('commentText')}
                       </h3>
                       <div>
                         {/* Render comments from commentsState as needed */}
@@ -264,7 +266,7 @@ const TaskDetails = () => {
                         <input
                           type="text"
                           id="commentBox"
-                          placeholder="Add a comment..."
+                          placeholder={t('addCommentBtnText')}
                           className="w-full border rounded-md py-2 px-3 my-2 text-gray-700 text-base focus:outline-none focus:border-blue-500 focus:shadow-outline-blue"
                         />
                         <button
@@ -279,7 +281,7 @@ const TaskDetails = () => {
                           }}
                           className="mb-4 inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                         >
-                          Add Comment
+                          {t('addCommentBtnText')}
                         </button>
                       </div>
                     </div>
@@ -289,14 +291,14 @@ const TaskDetails = () => {
                         type="submit"
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 mr-2 text-sm font-medium text-white hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        Update
+                        {t('updateButtonText')}
                       </button>
                       <button
                         type="submit"
                         onClick={closeModal}
                         className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       >
-                        Cancel
+                        {t('cancelButtonText')}
                       </button>
                     </form>
                    
