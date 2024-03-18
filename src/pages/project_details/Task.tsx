@@ -18,7 +18,7 @@ const Task = forwardRef<
   const {t} = useTranslation();
 
   // Date Localization
- function FormattedDate({ dateString }) {
+ function FormattedDate({ dateString}:any) {
     const { i18n } = useTranslation();
     const [formattedDate, setFormattedDate] = useState('');
   

@@ -3,16 +3,21 @@ import i18n from 'i18next';
 import { Menu} from "@headlessui/react";
 
 const LanguageSelector: React.FC = () => {
-  const [open, setOpen] = useState(false);
-
+  
   const [currentLanguage, setCurrentLanguage] = useState<string>(i18n.language);
+  console.log('currentLanguage',currentLanguage)
 
   const toggleLanguage = (newLanguage: string) => {
     setCurrentLanguage(newLanguage);
-    i18n.changeLanguage(newLanguage, (err, t) => {
+    
+
+    i18n.changeLanguage(newLanguage, (err) => {
       if (err) return console.log('something went wrong loading', err);
     });
-    setOpen(false);
+
+    //Error 1
+    throw new Error("An error occurred while changing the language")
+    
   };
 
   const languageMap: { [key: string]: string } = {
@@ -26,7 +31,7 @@ const LanguageSelector: React.FC = () => {
        <Menu as="div" className="inline-block text-center relative mr-3">
       <div>
         <Menu.Button className="rounded-lg bg-blue-100 font-medium text-sm p-2 text-blue-900 hover:text-blue-600">
-          {languageMap[currentLanguage]}
+            {currentLanguage === 'en-US' ? 'English' : languageMap[currentLanguage]}
         </Menu.Button>
       </div>
       <Menu.Items className="absolute mt-2  rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
